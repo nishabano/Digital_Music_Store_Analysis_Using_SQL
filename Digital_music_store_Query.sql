@@ -15,15 +15,12 @@ order by c desc;
 SELECT * FROM music.invoice
 order by total desc
 limit 3;
-/* Q.4)Which city has the best customer ? We would like to throw a promotional music Festival in the city
- we made the most money.Write a query that returns one city that has hilghest sum of invoice totals.
- Return both city name & sum of all invoice totals.*/
+/* Q.4)Which city has the best customer ? We would like to throw a promotional music Festival in the city.we made the most money. Write a query that returns one city that has hilghest sum of invoice totals.Return both city name & sum of all invoice totals.*/
 SELECT sum(total) as invoice_total ,billing_city FROM music.invoice
 group by billing_city
 order by invoice_total desc;
 
-/* Q5: Who is the best customer? The customer who has spent the most money will be declared the best customer. 
-Write a query that returns the person who has spent the most money.*/
+/* Q5: Who is the best customer? The customer who has spent the most money will be declared the best customer. Write a query that returns the person who has spent the most money.*/
 SELECT customer.customer_id,
  customer.first_name, 
  customer.last_name ,
@@ -36,8 +33,7 @@ customer.last_name
 order by total desc
 limit 1;
 
-/* Q6: Write query to return the email, first name, last name, & Genre of all Rock Music listeners. 
-Return your list ordered alphabetically by email starting with A. */
+/* Q6: Write query to return the email, first name, last name, & Genre of all Rock Music listeners. Return your list ordered alphabetically by email starting with A. */
 SELECT distinct email,first_name,last_name 
 FROM music.customer
 JOIN music.invoice
@@ -51,8 +47,7 @@ WHERE track_id in (
       WHERE genre.name LIKE 'Rock'
 )
 Order by email;
-/* Q7: Return all the track names that have a song length longer than the average song length. 
-Return the Name and Milliseconds for each track. Order by the song length with the longest songs listed first. */
+/* Q7: Return all the track names that have a song length longer than the average song length. Return the Name and Milliseconds for each track. Order by the song length with the longest songs listed first. */
 SELECT name,milliseconds FROM music.track
 where milliseconds > (
       select avg(milliseconds) as avg_track_length
@@ -137,9 +132,7 @@ FROM sales_per_country
 JOIN max_genre_per_country ON sales_per_country.country = max_genre_per_country.country
 WHERE sales_per_country.purchases_per_genre = max_genre_per_country.max_genre_number;
 
-/* Q10: Write a query that determines the customer that has spent the most on music for each country. 
-Write a query that returns the country along with the top customer and how much they spent. 
-For countries where the top amount spent is shared, provide all customers who spent this amount. */
+/* Q10: Write a query that determines the customer that has spent the most on music for each country. Write a query that returns the country along with the top customer and how much they spent. For countries where the top amount spent is shared, provide all customers who spent this amount. */
 
 /* Steps to Solve:  Similar to the above question. There are two parts in question- 
 first find the most spent on music for each country and second filter the data for respective customers. */
